@@ -1,5 +1,2 @@
 # ST-FMDC
-ST-FMDC
 
-# MMHE
-AD
