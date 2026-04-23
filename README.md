@@ -1,12 +1,10 @@
 # ST-FMDC
 
-ST-FMDC is a foundation-model-driven multi-modal framework for spatial gene expression prediction from H&E histology images.
-
----
+ST-FMDC: A Dual-Aligned CLIP Framework for Spatial Transcriptomics Prediction with Textual Cell-Type Information
 
 ## Overview
 
-This repository provides the implementation of **ST-FMDC**, a multi-modal framework for predicting spatial gene expression from H&E histology images. The framework is designed to jointly model histological morphology, transcriptomic information, and cell-type semantics for biologically informed spatial transcriptomics analysis.
+This repository provides the implementation of ST-FMDC, a multi-modal framework for predicting spatial gene expression from H&E histology images. The framework is designed to jointly model histological morphology, transcriptomic information, and cell-type semantics for biologically informed spatial transcriptomics analysis.
 
 Existing methods for this task often face three major challenges:  
 (1) insufficient biologically meaningful cross-modal alignment between morphology and gene expression,  
