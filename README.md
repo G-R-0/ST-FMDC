@@ -1,6 +1,6 @@
 # ST-FMDC
 
-ST-FMDC: A Dual-Aligned CLIP Framework for Spatial Transcriptomics Prediction with Textual Cell-Type Information
+**ST-FMDC: A Dual-Aligned CLIP Framework for Spatial Transcriptomics Prediction with Textual Cell-Type Information
 
 ## Overview
 
