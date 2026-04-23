@@ -15,9 +15,9 @@ Existing methods for this task often face three major challenges:
 
 To address these issues, ST-FMDC integrates four main components:
 
-- **MMFE**: a **M**ulti-**M**odal **F**oundation **E**xtractor for visual, molecular, and semantic representation learning
-- **DA-CLIP**: a **D**ual-**A**ligned CLIP module for biologically meaningful cross-modal alignment
-- **MNA**: a **M**amba-based **N**eighboring **A**ggregator for long-range spatial dependency modeling
+- **MMFE**: a Multi-Modal Foundation Extractor for visual, molecular, and semantic representation learning
+- **DA-CLIP**: a Dual-Aligned CLIP module for biologically meaningful cross-modal alignment
+- **MNA**: a Mamba-based Neighboring Aggregator for long-range spatial dependency modeling
 - **TGE-CS**: a tail-aware gene expression and cell-type supervision strategy for robust optimization under imbalanced data distributions
 
 This codebase supports training, evaluation, and downstream analysis on multiple public and in-house spatial transcriptomics datasets, including melanoma, breast cancer, and cSCC cohorts, with optional external validation on datasets such as **10x Visium HD** and independent **in-house H&E cohorts**.
@@ -74,7 +74,7 @@ We recommend using **Conda** or **Miniconda** to create the environment from the
 
 ```bash
 conda env create -f environment.yml
-conda activate mamba_env
+conda activate ST-FMDC
 ```
 
 ### Environment Summary
@@ -112,9 +112,9 @@ Clone the repository and create the environment:
 
 ```bash
 git clone <your-repo-url>
-cd ST-FMDC
+cd /ST-FMDC
 conda env create -f environment.yml
-conda activate mamba_env
+conda activate ST-FMDC
 ```
 
 If the project is organized as a Python package, it can also be installed in editable mode:
