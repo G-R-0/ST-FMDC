@@ -19,7 +19,7 @@ Create the environment from the provided `environment.yml` file:
 
 ```bash
 conda env create -f environment.yml
-conda activate mamba_env
+conda activate ST-FMDC
 ```
 
 The environment is configured with:
