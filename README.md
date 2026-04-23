@@ -6,6 +6,10 @@ ST-FMDC is a two-stage foundation-model-driven multi-modal framework for spatial
 # Graphic Abstract
 
 # Overview
-The repository contains the general functionality for training and evaluating the proposed ST-FMDC model on spatial transcriptomics datasets. It implements the key components of ST-FMDC, including the Multi-Modal Foundation Extractor (MMFE), the Dual-Aligned CLIP module (DA-CLIP), the Mamba-based Neighboring Aggregator (MNA), and the tail-aware gene expression and cell-type supervision strategy for robust spatial gene expression prediction from H&E images.
+This repository contains the general functionality for training and evaluating the proposed ST-FMDC framework for spatial gene expression prediction from H&E histology images. The framework integrates histology, transcriptomics, and textual cell-type knowledge to achieve biologically meaningful cross-modal alignment, long-range spatial dependency modeling, and robust optimization under imbalanced data distributions.
+
+The repository includes the key implementation details of ST-FMDC, including the Multi-Modal Foundation Extractor (MMFE), the Dual-Aligned CLIP module (DA-CLIP), the Mamba-based Neighboring Aggregator (MNA), and the tail-aware gene expression and cell-type supervision strategy. The model can be benchmarked on multiple public and in-house spatial transcriptomics datasets, including melanoma, breast cancer, and cSCC cohorts, with additional validation on a public 10x Visium HD dataset and an independent in-house H&E image cohort.
+
+For data preprocessing, we additionally use cell2location (https://cell2location.readthedocs.io/en/latest/notebooks/cell2location_tutorial.html) for cell-type annotation in spatial transcriptomics data, BioMedCLIP (https://huggingface.co/ZiyueWang/biomedclip) for extracting text features from cell-type descriptions, and scFoundation (https://github.com/biomap-research/scFoundation) for extracting single-cell transcriptomic features. Cell2location provides a Bayesian framework for mapping reference cell types onto spatial transcriptomics data; BioMedCLIP is a biomedical vision-language foundation model built on PubMedBERT and ViT; and scFoundation is a large-scale foundation model for single-cell transcriptomics with pretrained cell embeddings and downstream utilities.
 
 # Installation (Environment)
