@@ -4,21 +4,14 @@ ST-FMDC: A Dual-Aligned CLIP Framework for Spatial Transcriptomics Prediction wi
 
 ## Overview
 
-This repository provides the implementation of ST-FMDC, a multi-modal framework for predicting spatial gene expression from H&E histology images. The framework is designed to jointly model histological morphology, transcriptomic information, and cell-type semantics for biologically informed spatial transcriptomics analysis.
-
-Existing methods for this task often face three major challenges:  
-(1) insufficient biologically meaningful cross-modal alignment between morphology and gene expression,  
-(2) limited modeling of long-range spatial dependencies in complex tissue microenvironments, and  
-(3) reduced robustness under severe cell-type and gene-expression imbalance.
-
-To address these issues, ST-FMDC integrates four main components:
+This repository provides the implementation of ST-FMDC, a multi-modal framework for predicting spatial gene expression from H&E histology images. The framework is designed to jointly model histological morphology, transcriptomic information, and cell-type semantics for biologically informed spatial transcriptomics analysis.ST-FMDC integrates four main components:
 
 - **MMFE**: a Multi-Modal Foundation Extractor for visual, molecular, and semantic representation learning
 - **DA-CLIP**: a Dual-Aligned CLIP module for biologically meaningful cross-modal alignment
 - **MNA**: a Mamba-based Neighboring Aggregator for long-range spatial dependency modeling
 - **TGE-CS**: a tail-aware gene expression and cell-type supervision strategy for robust optimization under imbalanced data distributions
 
-This codebase supports training, evaluation, and downstream analysis on multiple public and in-house spatial transcriptomics datasets, including melanoma, breast cancer, and cSCC cohorts, with optional external validation on datasets such as **10x Visium HD** and independent **in-house H&E cohorts**.
+This codebase supports training, evaluation, and downstream analysis on multiple public and in-house spatial transcriptomics datasets, including melanoma, breast cancer, and cSCC cohorts, with optional external validation on datasets such as 10x Visium HD and independent in-house H&E cohorts.
 
 In the preprocessing pipeline, we additionally incorporate:
 
