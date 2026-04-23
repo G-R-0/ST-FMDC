@@ -103,16 +103,6 @@ python main.py \
 
 Outputs are saved under `--output_dir`, including metrics JSON files and checkpoints.
 
-## Optional: Upload Code to GitHub
-
-```bash
-python github_upload.py \
-  --repo-path . \
-  --remote-url git@github.com:your-name/your-repo.git \
-  --branch main \
-  --init-if-needed \
-  --commit-message "chore: update project files"
-```
 
 ## Citation
 
