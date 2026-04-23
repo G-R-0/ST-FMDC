@@ -203,13 +203,13 @@ Please refer to the configuration files in `configs/` or the argument parser in 
 
 ## Supported Data
 
-This codebase is intended for experiments on spatial transcriptomics datasets containing paired histology and molecular measurements, including but not limited to:
+This codebase is intended for experiments on spatial transcriptomics datasets stored in **AnnData (`.h5ad`)** format, containing paired histology and molecular measurements. The current pipeline is designed to support datasets such as:
 
 - melanoma
 - breast cancer
 - cSCC
 - external validation cohorts
-- Visium / Visium HD style datasets after preprocessing into the expected format
+- Visium / Visium HD style datasets after preprocessing into the expected `.h5ad` format
 
 ---
 
