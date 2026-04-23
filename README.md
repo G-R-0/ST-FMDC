@@ -13,3 +13,8 @@ The repository includes the key implementation details of ST-FMDC, including the
 For data preprocessing, we additionally use cell2location (https://cell2location.readthedocs.io/en/latest/notebooks/cell2location_tutorial.html) for cell-type annotation in spatial transcriptomics data, BioMedCLIP (https://huggingface.co/ZiyueWang/biomedclip) for extracting text features from cell-type descriptions, and scFoundation (https://github.com/biomap-research/scFoundation) for extracting single-cell transcriptomic features. Cell2location provides a Bayesian framework for mapping reference cell types onto spatial transcriptomics data; BioMedCLIP is a biomedical vision-language foundation model built on PubMedBERT and ViT; and scFoundation is a large-scale foundation model for single-cell transcriptomics with pretrained cell embeddings and downstream utilities.
 
 # Installation (Environment)
+We recommend using Anaconda/Miniconda to manage the environment.
+
+Create the environment from the provided environment.yml file:
+conda env create -f environment.yml
+conda activate mamba_env
