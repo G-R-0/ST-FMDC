@@ -19,43 +19,7 @@ In the preprocessing pipeline, we additionally incorporate:
 - **BioMedCLIP** for text feature extraction from cell-type descriptions
 - **scFoundation** for single-cell transcriptomic feature extraction
 
----
-
-## Framework
-
-ST-FMDC is designed to integrate morphology, molecular expression, and cell-type semantics in a unified learning pipeline.
-
-### Main characteristics
-
-- biologically informed cross-modal alignment between histology, gene expression, and cell-type text
-- long-range spatial context modeling with a Mamba-based neighboring aggregator
-- robust optimization under imbalance via tail-aware gene expression supervision and auxiliary cell-type guidance
-- flexible integration of pretrained foundation models for both semantic and transcriptomic representation learning
-
----
-
-## Repository Structure
-
-```text
-ST-FMDC/
-├── configs/                  # configuration files
-├── data/
-│   ├── raw/                  # raw data
-│   ├── processed/            # processed data for training/evaluation
-│   └── external/             # optional external validation datasets
-├── preprocessing/
-│   ├── cell2location/        # cell-type annotation pipeline
-│   ├── biomedclip/           # text feature extraction
-│   └── scfoundation/         # single-cell feature extraction
-├── models/                   # model definitions
-├── training/                 # training scripts
-├── evaluation/               # evaluation scripts
-├── visualization/            # visualization and downstream analysis
-├── environment.yml           # conda environment definition
-└── README.md
-```
-
----
+# Graphic Abstract
 
 ## Environment
 
@@ -90,12 +54,10 @@ The environment also includes CUDA compilation support (`cuda-nvcc=11.8.89`) and
 
 ### Notes
 
-- The default environment name is **`mamba_env`**.
+- The default environment name is **`ST-FMDC`**.
 - The current environment file is configured for a **Linux + CUDA 11.8** setup.
 - If your server or workstation uses a different CUDA runtime, compiler toolchain, or driver version, you may need to modify `environment.yml`.
 - For CPU-only execution, remove CUDA-specific dependencies and install the corresponding CPU version of PyTorch.
-
----
 
 ## Installation
 
@@ -114,96 +76,109 @@ If the project is organized as a Python package, it can also be installed in edi
 pip install -e .
 ```
 
----
-
 ## Data Preprocessing
 
-Before training ST-FMDC, the datasets should be organized into a unified format containing:
+All datasets used in this project are preprocessed in advance and stored in the **`.h5ad`** format. Each dataset is represented as an **AnnData** object and already contains the information required for training, evaluation, and downstream analysis.
 
-- H&E histology images
-- spatial coordinates
-- spot-level or region-level gene expression matrices
-- train / validation / test splits
-- optional cell-type labels or cell-type text descriptions
+In our data organization, the preprocessed `.h5ad` files typically include:
 
-### 1. Cell-type annotation with cell2location
+- gene expression matrices stored in `X` and/or `layers`
+- gene-level annotations stored in `var`
+- spot-level metadata stored in `obs`, such as sample identifiers, patient information, split labels, cell-type-related annotations, text descriptions, and fold assignments
+- multimodal representations stored in `obsm`, such as spatial coordinates, H&E patch features, cell abundance estimates, and transcriptomic foundation features
+- graph-related information stored in `obsp`, including neighborhood connectivities and distances
+- dataset-level metadata stored in `uns`
 
-We use **cell2location** to estimate spatial cell-type abundance by integrating spatial transcriptomics data with a single-cell RNA-seq reference.
+For example, a preprocessed dataset may contain:
 
-Official tutorial:  
-[https://cell2location.readthedocs.io/en/latest/notebooks/cell2location_tutorial.html](https://cell2location.readthedocs.io/en/latest/notebooks/cell2location_tutorial.html)
+- spatial coordinates in `obsm['spatial']`
+- histology patch features in `obsm['patches_scale_1.0']`
+- scFoundation features in `obsm['X_scF']`
+- cell-type abundance estimates in `obsm['means_cell_abundance_w_sf']`
+- text descriptions for semantic encoding in `obs['text_for_clip']`
+- train/test split information in `obs['split']`
+- cross-validation fold assignments in `obs['fold1']` to `obs['fold5']`
 
-In our workflow, the inferred cell-type information is used to construct biologically informed semantic descriptions for downstream multimodal alignment.
+This design allows the datasets to be directly loaded into the ST-FMDC pipeline without additional manual reformatting.
 
-### 2. Text feature extraction with BioMedCLIP
+### Preprocessing resources
 
-We use **BioMedCLIP** to extract semantic embeddings from cell-type descriptions or prompts.
+The preprocessing pipeline additionally incorporates the following external resources:
 
-Official model page:  
-[https://huggingface.co/ZiyueWang/biomedclip/tree/main](https://huggingface.co/ZiyueWang/biomedclip/tree/main)
+1. **cell2location** for spatial cell-type annotation  
+   Official tutorial:  
+   [https://cell2location.readthedocs.io/en/latest/notebooks/cell2location_tutorial.html](https://cell2location.readthedocs.io/en/latest/notebooks/cell2location_tutorial.html)
 
-These text embeddings are used as semantic guidance for cross-modal alignment in ST-FMDC.
+2. **BioMedCLIP** for text feature extraction from cell-type descriptions  
+   Official model page:  
+   [https://huggingface.co/ZiyueWang/biomedclip/tree/main](https://huggingface.co/ZiyueWang/biomedclip/tree/main)
 
-### 3. Single-cell feature extraction with scFoundation
+3. **scFoundation** for single-cell transcriptomic feature extraction  
+   Official repository:  
+   [https://github.com/biomap-research/scFoundation](https://github.com/biomap-research/scFoundation)
 
-We use **scFoundation** to obtain transcriptomic foundation features from single-cell data.
+### Final model inputs
 
-Official repository:  
-[https://github.com/biomap-research/scFoundation](https://github.com/biomap-research/scFoundation)
+After loading a preprocessed `.h5ad` file, the model inputs typically include:
 
-In our workflow, scFoundation features serve as prior molecular representations for multimodal learning.
-
-### 4. Final model inputs
-
-After preprocessing, the final inputs typically include:
-
-- H&E image patches or visual features
-- spatial neighborhood information
+- H&E image patches or pre-extracted visual patch features
+- spatial coordinates and neighborhood relations
 - spot-level gene expression targets
-- BioMedCLIP text embeddings
+- BioMedCLIP-based text embeddings or text descriptions
 - scFoundation transcriptomic embeddings
-- cell-type annotations inferred by cell2location
-
----
+- cell-type abundance or annotation information
 
 ## Quick Start
 
 > **Note**  
-> Replace the example script names below with the actual scripts used in your repository if they differ.
+> The example commands below assume that each dataset has already been preprocessed and saved as an `.h5ad` file. Replace the script names and configuration paths with those used in your repository if they differ.
 
-### 1. Run preprocessing
+### 1. Prepare the `.h5ad` input data
+
+Before training ST-FMDC, all datasets are preprocessed in advance and stored in a unified **`.h5ad`** format., for example:
 
 ```bash
-python preprocessing/run_cell2location.py
-python preprocessing/extract_biomedclip_text_features.py
-python preprocessing/extract_scfoundation_features.py
+data/
+├── processed/
+│   ├── melanoma.h5ad
+│   ├── breast.h5ad
+│   └── cscc.h5ad
 ```
+
+Each `.h5ad` file should contain the required AnnData fields used by the pipeline, such as expression matrices, spatial coordinates, patch features, transcriptomic features, text descriptions, and split/fold annotations.
 
 ### 2. Train ST-FMDC
 
 ```bash
-python train.py --config configs/st_fmdc.yaml
+python train.py --config configs/st_fmdc.yaml --data_path data/processed/breast.h5ad
 ```
 
 ### 3. Evaluate on the test set
 
 ```bash
-python test.py --config configs/st_fmdc.yaml --ckpt path/to/checkpoint.pth
+python test.py --config configs/st_fmdc.yaml --data_path data/processed/breast.h5ad --ckpt path/to/checkpoint.pth
 ```
 
-### 4. External validation
+### 4. Run cross-validation
 
 ```bash
-python test_external.py --config configs/st_fmdc.yaml --ckpt path/to/checkpoint.pth
+python train_cv.py --config configs/st_fmdc.yaml --data_path data/processed/breast.h5ad --fold fold1
 ```
 
-### 5. Visualization and downstream analysis
+Repeat the command for `fold2` to `fold5` as needed.
+
+### 5. External validation
 
 ```bash
-python evaluate.py
-python visualize.py
+python test_external.py --config configs/st_fmdc.yaml --data_path data/external/external_cohort.h5ad --ckpt path/to/checkpoint.pth
 ```
 
+### 6. Visualization and downstream analysis
+
+```bash
+python evaluate.py --data_path data/processed/breast.h5ad --ckpt path/to/checkpoint.pth
+python visualize.py --data_path data/processed/breast.h5ad --ckpt path/to/checkpoint.pth
+```
 ---
 
 ## Configuration
