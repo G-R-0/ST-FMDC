@@ -20,19 +20,21 @@ Create the environment from the provided `environment.yml` file:
 ```bash
 conda env create -f environment.yml
 conda activate mamba_env
+```
 
 The environment is configured with:
-Python 3.12.11
-CUDA 11.8
-PyTorch 2.6.0
-torchvision 0.21.0
-torch-geometric 2.6.1
-open-clip-torch 3.2.0
-transformers 4.56.2
-scanpy 1.11.4
-anndata 0.12.2
-scikit-learn 1.7.2
-pandas 2.3.3
-matplotlib 3.10.6
-umap-learn 0.5.9.post2
-Other required packages are listed in environment.yml.
+* **Python** 3.12.11
+* **CUDA** 11.8
+* **PyTorch** 2.6.0
+* **torchvision** 0.21.0
+* **torch-geometric** 2.6.1
+* **open-clip-torch** 3.2.0
+* **transformers** 4.56.2
+* **scanpy** 1.11.4
+* **anndata** 0.12.2
+* **scikit-learn** 1.7.2
+* **pandas** 2.3.3
+* **matplotlib** 3.10.6
+* **umap-learn** 0.5.9.post2
+
+Other required packages are listed in `environment.yml`.
