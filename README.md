@@ -15,12 +15,13 @@ For data preprocessing, we additionally use cell2location (https://cell2location
 # Installation (Environment)
 We recommend using Anaconda/Miniconda to manage the environment.
 
-Create the environment from the provided environment.yml file:
+Create the environment from the provided `environment.yml` file:
+
 ```bash
 conda env create -f environment.yml
-conda activate ST-FMDC
-The environment is configured with:
+conda activate mamba_env
 
+The environment is configured with:
 Python 3.12.11
 CUDA 11.8
 PyTorch 2.6.0
@@ -34,5 +35,4 @@ scikit-learn 1.7.2
 pandas 2.3.3
 matplotlib 3.10.6
 umap-learn 0.5.9.post2
-
 Other required packages are listed in environment.yml.
