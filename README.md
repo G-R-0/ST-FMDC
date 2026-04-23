@@ -16,5 +16,6 @@ For data preprocessing, we additionally use cell2location (https://cell2location
 We recommend using Anaconda/Miniconda to manage the environment.
 
 Create the environment from the provided environment.yml file:
+```bash
 conda env create -f environment.yml
-conda activate mamba_env
+conda activate ST-FMDC
