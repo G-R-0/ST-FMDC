@@ -231,33 +231,19 @@ If you find this repository useful in your research, please cite our work:
 @article{stfmdc,
   title   = {ST-FMDC: A Foundation-Model-Driven Multi-Modal Dual-Aligned CLIP Framework for Spatial Gene Expression Prediction from H\&E Images},
   author  = {...},
-  journal = {IEEE Transactions on Medical Imaging},
+  journal = {...},
   year    = {...}
 }
 ```
 
----
+## References
 
-## Acknowledgements
+- [1] **cell2location maps fine-grained cell types in spatial transcriptomics**  
+  https://www.nature.com/articles/s41587-021-01139-4
 
-We thank the authors and maintainers of the following projects for making their resources publicly available:
+- [2] **BioMedCLIP: a multimodal biomedical foundation model pretrained from fifteen million scientific image-text pairs**  
+  https://arxiv.org/abs/2303.00915
 
-- cell2location
-- BioMedCLIP
-- scFoundation
+- [3] **scFoundation: a foundation model for cell biology discovery**  
+  https://www.nature.com/articles/s41592-024-02305-7
 
----
-
-## License
-
-Please specify the license for this repository here, for example:
-
-```text
-MIT License
-```
-
-or
-
-```text
-Apache-2.0
-```
