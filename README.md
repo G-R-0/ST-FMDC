@@ -247,3 +247,7 @@ If you find this repository useful in your research, please cite our work:
 - [3] **scFoundation: a foundation model for cell biology discovery**  
   https://www.nature.com/articles/s41592-024-02305-7
 
+- [4] **Phikon-v2 (official model/code page)**  
+  https://huggingface.co/owkin/phikon-v2
+  
+
